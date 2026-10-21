@@ -1,1 +1,1 @@
-Favorite cloud : Azure
+Favorite cloud : AWS
