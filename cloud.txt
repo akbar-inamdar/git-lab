@@ -1,1 +1,2 @@
-Favorite cloud : GCP
+<<<<<<< HEAD
+Favorite cloud : Azure, AWS, GCP
