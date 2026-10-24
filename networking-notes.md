@@ -35,3 +35,18 @@
 ## Troubleshooting order
 - Can I reach it (ping, DNS, port)? If yes, what status code?
 - ping IP works but ping name fails = DNS problem
+
+## Subnetting and CIDR
+- IP = 32 bits; /24 = first 24 bits network, last 8 bits hosts
+- Host bits = 32 - prefix; addresses = 2^host bits; usable = that minus 2
+- /24 = 256 (254 usable), /25 = 128, /26 = 64, /27 = 32, /28 = 16
+- Azure/AWS reserve 5 addresses per subnet
+- Block size method: network address is a multiple of the block size;
+  broadcast = next subnet start - 1
+- Same subnet = same network part; different subnet needs a router (default gateway)
+- ip route shows the default gateway (mine: 10.0.2.2)
+
+## Layers (TCP/IP)
+- Application (HTTP, SSH, DNS) > Transport (ports, TCP/UDP) > Internet (IP, ping) > Network access
+- OSI: 7 Application, 4 Transport, 3 Network (IP), 1-2 Physical/Data link
+- ping works but port fails = check service listening (ss -tuln), firewall, NSG
