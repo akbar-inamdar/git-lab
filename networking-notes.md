@@ -50,3 +50,14 @@
 - Application (HTTP, SSH, DNS) > Transport (ports, TCP/UDP) > Internet (IP, ping) > Network access
 - OSI: 7 Application, 4 Transport, 3 Network (IP), 1-2 Physical/Data link
 - ping works but port fails = check service listening (ss -tuln), firewall, NSG
+
+## DNS
+- Turns a name into an IP; my computer asks a resolver (mine: 192.168.31.1), which searches and caches
+- TTL = seconds an answer may be cached; counts down; low TTL before migrations
+- A = name to IPv4 | AAAA = name to IPv6 | CNAME = alias to another name
+- MX = mail servers | NS = servers in charge of the domain's records
+- Lookup order: /etc/hosts first, then DNS resolver (/etc/resolv.conf)
+- ping/curl use /etc/hosts; dig/nslookup skip it and ask DNS directly
+- Flow: ping 8.8.8.8 ok but ping google.com fails = DNS
+  dig google.com (my resolver) vs dig @8.8.8.8 google.com (Google's)
+  only the second works = my resolver is the problem
