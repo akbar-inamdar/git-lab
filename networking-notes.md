@@ -61,3 +61,23 @@
 - Flow: ping 8.8.8.8 ok but ping google.com fails = DNS
   dig google.com (my resolver) vs dig @8.8.8.8 google.com (Google's)
   only the second works = my resolver is the problem
+
+## NAT
+- Lets many private IPs share one public IP (not enough IPv4 addresses)
+- Router replaces the private source IP with its public IP and records
+  the connection (port) in its NAT table; replies are matched back
+- Outsiders can't start connections to private hosts (no table entry)
+- Port forwarding = rule to let outside traffic reach an inside host
+- My VM: 10.0.2.15, gateway 10.0.2.2; curl ifconfig.me shows the public IP
+- Cloud: NAT Gateway lets private subnets reach the internet
+
+## Firewall (firewalld)
+- Rule list: allow or deny by port, protocol, source, direction
+- sudo systemctl status firewalld | sudo firewall-cmd --list-all
+- Service = nickname for a port (ssh = 22/tcp)
+- sudo firewall-cmd --add-port=8080/tcp  (runtime only)
+- add --permanent then --reload to keep it after reboot
+- Option and value need no spaces: --add-port=8080/tcp
+- Two locks: service must listen (ss -tuln) AND firewall must allow the port
+- Cloud: NSG does the same job around the VM
+- Can't reach a web server: running? listening? firewall? NSG? DNS?
