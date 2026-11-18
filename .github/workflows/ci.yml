@@ -1,0 +1,13 @@
+name: My First CI Workflow
+on:
+  push:
+    branches: [main, github-actions-lab]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run a test command
+        run: echo "My First Github Actions Workflow is working"
